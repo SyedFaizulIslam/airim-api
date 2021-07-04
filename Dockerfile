@@ -5,5 +5,6 @@ COPY ./ConsumerComplainModel.pkl /deploy/
 COPY ./ConsumerComplainTfidfVectorizer.pkl /deploy/
 WORKDIR /deploy/
 RUN pip install -r requirements.txt
+EXPOSE 80
 ENTRYPOINT ["python"] 
 CMD ["app.py"]

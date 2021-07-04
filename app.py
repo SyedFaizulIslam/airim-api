@@ -70,5 +70,5 @@ if __name__=='__main__':
     result = ModelResult(data)
     print('Model and vector initialize')
     print('Model Result:',result)
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=80)
     #app.run(port='8080')h

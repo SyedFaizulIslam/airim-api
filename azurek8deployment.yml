@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airim
+  labels:
+    app: airim
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: airimapi
+  template:
+    metadata:
+      labels:
+        name: airimapi
+        app: airimapi
+    spec:
+      securityContext:
+        runAsUser: 1000
+      hostname: airimapi
+      containers:
+      - name: airimapi
+        image: airimimageregistry.azurecr.io/airimapi:v1
+        imagePullPolicy: IfNotPresent
+        resources:
+            limits:
+              cpu: 2
+              memory: 4096Mi
+            requests:
+              cpu: 1
+              memory: 2048Mi
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: airimapi
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: airimapi
